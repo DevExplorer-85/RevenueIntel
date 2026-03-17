@@ -1,0 +1,21 @@
+ /* RangeSlider Custom Styles for Dark Theme */
+.rc-slider-mark-text {
+    color: #e2e8f0 !important;
+    font-family: "Inter", sans-serif;
+    font-size: 11px;
+}
+.rc-slider-tooltip-inner {
+    background-color: #141720 !important;
+    border: 1px solid #1f2535 !important;
+    color: #e2e8f0 !important;
+} 
+.rc-slider-handle {
+    border: solid 2px #7c6ef7 !important;
+    background-color: #141720 !important;
+}
+.rc-slider-track {
+    background-color: #7c6ef7 !important;
+}
+.rc-slider-rail {
+    background-color: #1f2535 !important;
+}

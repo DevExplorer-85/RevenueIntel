@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RevenueIntel | Minimalistic Analytics</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (v3.4) via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        bgDark: '#0A0A0A',
+                        cardDark: '#121212',
+                        borderDark: '#222222',
+                        gridLine: '#141414',
+                        stratiGreen: '#3ee679',
+                        textMuted: '#6b7280',
+                        textBlueish: '#788ca3',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0A0A0A;
+            color: #ffffff;
+            /* Grid background styling to match the image precisely */
+            background-image: 
+                linear-gradient(to right, #141414 1px, transparent 1px),
+                linear-gradient(to bottom, #141414 1px, transparent 1px);
+            background-size: 64px 64px;
+            background-position: center top;
+            min-height: 100vh;
+        }
+
+        /* Subtle glowing dot animation */
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        .live-dot {
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        .terminal-row:not(:last-child) {
+            border-bottom: 1px solid #222222;
+        }
+        
+        .terminal-row {
+            transition: background-color 0.2s;
+        }
+        
+        .terminal-row:hover {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-stratiGreen selection:text-black flex flex-col items-center">
+
+    <!-- Top Navigation -->
+    <nav class="w-full border-b border-borderDark bg-bgDark bg-opacity-90 backdrop-blur-sm sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="font-sans font-extrabold text-xl tracking-wide uppercase text-white">
+                RevenueIntel
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="#login" onclick="event.preventDefault(); document.getElementById('login-modal').classList.remove('hidden')" class="font-mono text-xs text-textMuted hover:text-white transition-colors uppercase tracking-widest cursor-pointer">
+                    Login
+                </a>
+                <a href="#signup" onclick="event.preventDefault(); document.getElementById('signup-modal').classList.remove('hidden')" class="font-mono text-xs text-textMuted border border-borderDark px-4 py-2 hover:text-white hover:border-textMuted transition-colors uppercase tracking-widest bg-bgDark cursor-pointer">
+                    Sign up
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="w-full max-w-6xl mx-auto px-6 pt-16 pb-24 flex flex-col z-10">
+        
+        <!-- Badge -->
+        <div class="inline-flex w-max items-center font-mono text-[11px] uppercase tracking-widest text-textBlueish border border-borderDark px-3 py-1.5 mb-8 bg-bgDark">
+            <span class="w-1.5 h-1.5 rounded-full bg-stratiGreen mr-2.5 live-dot"></span>
+            Live Intelligence Platform
+        </div>
+
+        <!-- Headline -->
+        <h1 class="text-5xl md:text-[64px] leading-[1.1] font-bold font-sans tracking-tight mb-6">
+            <span class="text-white block">Revenue Intelligence Dashboard</span>
+            <span class="text-stratiGreen block">&mdash; SaaS MRR Growth Analytics</span>
+        </h1>
+
+        <!-- Sub-headline -->
+        <p class="text-xl md:text-2xl text-textBlueish font-light max-w-3xl leading-relaxed mb-10 tracking-wide">
+            Track, decompose, and forecast recurring revenue built for the way SaaS businesses actually grow.
+        </p>
+
+        <!-- CTA Row -->
+        <div class="flex flex-col md:flex-row items-start md:items-center gap-6 mb-20">
+            <a href="http://localhost:8050" target="_blank" class="bg-stratiGreen text-bgDark font-mono font-semibold text-sm px-6 py-3.5 hover:bg-white transition-colors uppercase tracking-widest inline-flex items-center gap-2">
+                Launch Dashboard &rarr;
+            </a>
+            <span class="font-mono text-[12px] text-textMuted tracking-wide">
+                Built for founders managing $2M-$200M ARR
+            </span>
+        </div>
+
+        <!-- Terminal / Table Container -->
+        <div class="w-full border border-borderDark bg-cardDark/40 backdrop-blur-sm shadow-2xl">
+            <!-- Terminal Header -->
+            <div class="flex justify-between items-center px-6 py-4 border-b border-borderDark">
+                <div class="flex items-center gap-4">
+                    <div class="flex gap-1.5">
+                        <div class="w-2.5 h-2.5 rounded-full bg-red-500/80"></div>
+                        <div class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></div>
+                        <div class="w-2.5 h-2.5 rounded-full bg-stratiGreen/80"></div>
+                    </div>
+                    <span class="font-mono text-[11px] text-textMuted uppercase tracking-widest">
+                        REVENUE INTEL TERMINAL &mdash; STARTUP & SME TRACKER
+                    </span>
+                </div>
+                <!-- Live indicator -->
+                <div class="flex items-center gap-2 font-mono text-[11px] text-textMuted uppercase tracking-widest">
+                    Live <span class="w-1.5 h-1.5 rounded-full bg-stratiGreen live-dot"></span>
+                </div>
+            </div>
+
+            <!-- Terminal Rows -->
+            <div class="flex flex-col">
+                <!-- Row 1 -->
+                <div class="terminal-row flex justify-between items-center px-6 py-5">
+                    <div class="font-mono text-[12px] text-textBlueish uppercase tracking-widest">
+                        FINTECH SME (B2B Payments) &mdash; ARR
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span class="font-mono font-bold text-[17px] text-white">$1.2M</span>
+                        <span class="font-mono text-[13px] text-stratiGreen font-medium flex items-center">
+                            &#9652; +18.4%
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="terminal-row flex justify-between items-center px-6 py-5">
+                    <div class="font-mono text-[12px] text-textBlueish uppercase tracking-widest">
+                        ED-TECH STARTUP (Series A) &mdash; ARR
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span class="font-mono font-bold text-[17px] text-white">$4.8M</span>
+                        <span class="font-mono text-[13px] text-stratiGreen font-medium flex items-center">
+                            &#9652; +3.2%
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Row 3 -->
+                <div class="terminal-row flex justify-between items-center px-6 py-5">
+                    <div class="font-mono text-[12px] text-textBlueish uppercase tracking-widest">
+                        E-COMMERCE SME (Logistics SaaS) &mdash; ARR
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span class="font-mono font-bold text-[17px] text-white">$840K</span>
+                        <span class="font-mono text-[13px] text-red-500 font-medium flex items-center">
+                            &#9662; -2.1%
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Row 4 -->
+                <div class="terminal-row flex justify-between items-center px-6 py-5">
+                    <div class="font-mono text-[12px] text-textBlueish uppercase tracking-widest">
+                        HEALTH-TECH STARTUP &mdash; ARR
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span class="font-mono font-bold text-[17px] text-white">$2.5M</span>
+                        <span class="font-mono text-[13px] text-stratiGreen font-medium flex items-center">
+                            &#9652; +11.5%
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Row 5 -->
+                <div class="terminal-row flex justify-between items-center px-6 py-5">
+                    <div class="font-mono text-[12px] text-textBlueish uppercase tracking-widest">
+                        AI SAAS STARTUP &mdash; ARR
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span class="font-mono font-bold text-[17px] text-white">$14.3M</span>
+                        <span class="font-mono text-[13px] text-stratiGreen font-medium flex items-center">
+                            &#9652; +22.8%
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="mt-32 mb-10 w-full">
+            <h3 class="font-sans font-bold text-2xl text-white mb-10 tracking-tight text-center sm:text-left">Engineered for SaaS metrics that matter.</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+                <!-- Feature 1 -->
+                <div class="border border-borderDark bg-cardDark/40 p-8 hover:bg-cardDark transition-colors">
+                    <div class="w-10 h-10 border border-borderDark flex items-center justify-center font-mono text-stratiGreen mb-6">01</div>
+                    <h4 class="font-sans font-bold text-lg text-white mb-3">MRR Decomposition</h4>
+                    <p class="font-mono text-sm tracking-wide text-textBlueish leading-relaxed">
+                        Visualize net new, expansion, and contraction revenue on an institutional-grade waterfall chart. Don't just track growth—track the "why" behind it.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="border border-borderDark bg-cardDark/40 p-8 hover:bg-cardDark transition-colors">
+                    <div class="w-10 h-10 border border-borderDark flex items-center justify-center font-mono text-stratiGreen mb-6">02</div>
+                    <h4 class="font-sans font-bold text-lg text-white mb-3">Granular Cohort Retention</h4>
+                    <p class="font-mono text-sm tracking-wide text-textBlueish leading-relaxed">
+                        Track month-over-month lifetime value and customer stickiness via our heatmapped cohort engine. Predict churn risk before it impacts your bottom line.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="border border-borderDark bg-cardDark/40 p-8 hover:bg-cardDark transition-colors">
+                    <div class="w-10 h-10 border border-borderDark flex items-center justify-center font-mono text-stratiGreen mb-6">03</div>
+                    <h4 class="font-sans font-bold text-lg text-white mb-3">Universal Data Ingestion</h4>
+                    <p class="font-mono text-sm tracking-wide text-textBlueish leading-relaxed">
+                        Drop any messy structured dataset (.CSV, .XLSX, or .JSON) and watch our automated fuzzy-logic parser instantly map your columns to standardized dashboards.
+                    </p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="border border-borderDark bg-cardDark/40 p-8 hover:bg-cardDark transition-colors">
+                    <div class="w-10 h-10 border border-borderDark flex items-center justify-center font-mono text-stratiGreen mb-6">04</div>
+                    <h4 class="font-sans font-bold text-lg text-white mb-3">Dynamic Plan & Region Filters</h4>
+                    <p class="font-mono text-sm tracking-wide text-textBlueish leading-relaxed">
+                        Slice your total addressable market precisely. Quickly switch your dashboard context between global enterprise tiers or localized SMB markets with ease.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm transition-opacity">
+        <div class="w-full max-w-md bg-bgDark border border-borderDark p-8 relative shadow-2xl">
+            <button onclick="document.getElementById('login-modal').classList.add('hidden')" class="absolute top-4 right-5 text-2xl text-textMuted hover:text-white">&times;</button>
+            <h2 class="font-sans font-bold text-2xl text-white mb-6">Terminal Access</h2>
+            <form class="flex flex-col gap-5">
+                <div>
+                    <label class="block font-mono text-[11px] text-textBlueish uppercase tracking-widest mb-2">Work Email</label>
+                    <input type="email" class="w-full bg-cardDark border border-borderDark text-white px-4 py-3 font-mono text-sm focus:outline-none focus:border-stratiGreen transition-colors placeholder:text-borderDark" placeholder="user@company.com">
+                </div>
+                <div>
+                    <label class="block font-mono text-[11px] text-textBlueish uppercase tracking-widest mb-2">Password</label>
+                    <input type="password" class="w-full bg-cardDark border border-borderDark text-white px-4 py-3 font-mono text-sm focus:outline-none focus:border-stratiGreen transition-colors placeholder:text-borderDark" placeholder="••••••••">
+                </div>
+                <button type="button" onclick="document.getElementById('login-modal').classList.add('hidden')" class="w-full bg-stratiGreen text-bgDark font-mono font-semibold text-sm px-6 py-3.5 mt-2 hover:bg-white transition-colors uppercase tracking-widest">
+                    Authenticate
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Signup Modal -->
+    <div id="signup-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm transition-opacity">
+        <div class="w-full max-w-md bg-bgDark border border-borderDark p-8 relative shadow-2xl">
+            <button onclick="document.getElementById('signup-modal').classList.add('hidden')" class="absolute top-4 right-5 text-2xl text-textMuted hover:text-white">&times;</button>
+            <h2 class="font-sans font-bold text-2xl text-white mb-6">Request Access</h2>
+            <form class="flex flex-col gap-5">
+                <div>
+                    <label class="block font-mono text-[11px] text-textBlueish uppercase tracking-widest mb-2">Full Name</label>
+                    <input type="text" class="w-full bg-cardDark border border-borderDark text-white px-4 py-3 font-mono text-sm focus:outline-none focus:border-stratiGreen transition-colors placeholder:text-borderDark" placeholder="Jane Doe">
+                </div>
+                <div>
+                    <label class="block font-mono text-[11px] text-textBlueish uppercase tracking-widest mb-2">Work Email</label>
+                    <input type="email" class="w-full bg-cardDark border border-borderDark text-white px-4 py-3 font-mono text-sm focus:outline-none focus:border-stratiGreen transition-colors placeholder:text-borderDark" placeholder="jane@company.com">
+                </div>
+                <div>
+                    <label class="block font-mono text-[11px] text-textBlueish uppercase tracking-widest mb-2">Company ARR</label>
+                    <select class="w-full bg-cardDark border border-borderDark text-textMuted px-4 py-3 font-mono text-sm focus:outline-none focus:border-stratiGreen transition-colors appearance-none">
+                        <option value="">Select ARR Range</option>
+                        <option value="<1m">&lt; $1M</option>
+                        <option value="1m-10m">$1M - $10M</option>
+                        <option value="10m-50m">$10M - $50M</option>
+                        <option value=">50m">&gt; $50M</option>
+                    </select>
+                </div>
+                <button type="button" onclick="document.getElementById('signup-modal').classList.add('hidden')" class="w-full bg-stratiGreen text-bgDark font-mono font-semibold text-sm px-6 py-3.5 mt-2 hover:bg-white transition-colors uppercase tracking-widest">
+                    Join Waitlist
+                </button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
